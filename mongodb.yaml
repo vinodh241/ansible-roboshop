@@ -6,8 +6,15 @@
     ansible.builtin.copy:      # copy the modules from source to destination
       src: mongo.repo
       dest: /etc/yum.repos.d/mongo.repo
-      
+
   - name: Installing mongodb server
     ansible.builtin.dnf:      # Install the packages on redhat linux server ( we can use package module also)
       name:  mongodb-org
       state: present 
+
+  - name: start and enable mongodb 
+    ansible.builtin.service:  # Enable and starting any services in Ansible using ansible.builtin.service module
+      name: mongod
+      state: started
+      enabled: yes
+          
