@@ -1,0 +1,13 @@
+- name: configuring mongodb server
+  hosts: mongodb
+  become: yes
+  tasks:
+  - name: copying mongodb repos
+    ansible.builtin.copy:      # copy the modules from source to destination
+      src: mongo.repo
+      dest: /etc/yum.repos.d/mongo.repo
+      
+  - name: Installing mongodb server
+    ansible.builtin.dnf:      # Install the packages on redhat linux server ( we can use package module also)
+      name:  mongodb-org
+      state: present 
