@@ -1,7 +1,6 @@
-- name: configuring mongodb server 
-  hosts: mongodb
-  connection: local
+- name: configuring mongodb server
   become: yes
+  hosts: mongodb
   tasks:
   - name: copying mongodb repos
     ansible.builtin.copy:      # copy the modules from source to destination
