@@ -31,8 +31,32 @@
       dest: /tmp/catalogue.zip
     
   - name: Extract the catalogue code 
-    ansible.builtin.unarchive:
+    ansible.builtin.unarchive:                           # Unzip or extracting the files using ( ansible.builtin.unarchive) module
       src: /tmp/catalogue.zip
       dest: /app
       remote_src: yes
+
+  - name: Install dependencies
+    community.general.npm:                               # Installing npm package using  ( community.general.npm ) modules
+      path: /app
+
+  - name: copy catalogue service to system directoy 
+    ansible.builtin.copy:                               # copy the modules from source to destination using ( ansible.builtin.copy) module
+      src: catalogue.service
+      dest: /etc/systemd/system/
+
+  - name: Systemctl daemon reload
+    ansible.builtin.systemd_service:                    # systemctl restarting daemon using ( ansible.builtin.systemd_service) module
+      daemon_reload: yes
+
+  - name: start and enable catalogue services
+    ansible.builtin.service:                            # to restarting and enable service ( ansible.builtin.service) module
+      name: catalogue
+      state: restarted
+      enabled: yes 
+
+
+
+
+    
 
