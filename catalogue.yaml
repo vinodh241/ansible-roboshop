@@ -1,0 +1,37 @@
+- name: creating a catalogue component
+  become: yes
+  hosts: catalogue
+
+  tasks:
+  - name: Diasable default nodejs 
+    ansible.builtin.command: dnf module disable nodejs -y   # There is no module for disable modules so we are using command modules (ansible.builtin.command)
+
+  - name: enable nodejs 20 versoin
+    ansible.builtin.command: dnf module enable nodejs:20 -y 
+  - name: Installing Nodejs 
+    ansible.builtin.dnf:                                    # Installing a package using {ansible.builtin.dnf} modules
+      name: nodejs    
+      state: present
+
+  - name: creating system user 
+    ansible.builtin.user:                                  # creating a user using  {ansible.builtin.user} modules
+      name: system user
+      shell: /sbin/nologin
+      system: true
+      home: /app
+
+  - name: create app directoty
+    ansible.builtin.file:                                 # creating a directory using ( ansible.builtin.file) modules
+      path: /app
+      state: directory
+
+  - name: Download catalogue application code 
+    ansible.builtin.get_url:
+      url: https://roboshop-artifacts.s3.amazonaws.com
+      dest: /tmp/catalogue.zip
+    
+  - name: Extact the catalogue code 
+    ansible.builtin.unarchive:
+      src: /tmp/catalogue.zip
+      dest: /app
+      
