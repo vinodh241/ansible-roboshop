@@ -26,12 +26,13 @@
       state: directory
 
   - name: Download catalogue application code 
-    ansible.builtin.get_url:
+    ansible.builtin.get_url:                              # dowloading the files using ( ansible.builtin.get_url) module
       url: https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip 
       dest: /tmp/catalogue.zip
     
-  - name: Extact the catalogue code 
+  - name: Extract the catalogue code 
     ansible.builtin.unarchive:
       src: /tmp/catalogue.zip
       dest: /app
+      remote_src: yes
 
