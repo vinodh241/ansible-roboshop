@@ -15,7 +15,7 @@
 
   - name: creating system user 
     ansible.builtin.user:                                  # creating a user using  {ansible.builtin.user} modules
-      name: system user
+      name: roboshop
       shell: /sbin/nologin
       system: true
       home: /app
@@ -34,4 +34,4 @@
     ansible.builtin.unarchive:
       src: /tmp/catalogue.zip
       dest: /app
-      
+
