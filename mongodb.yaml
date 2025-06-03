@@ -1,4 +1,4 @@
-- name: configuring mongodb server
+- name: configuring mongodb server 
   hosts: mongodb
   become: yes
   tasks:
@@ -23,8 +23,8 @@
       regexp: '127.0.0.1'
       replace: '0.0.0.0'
 
-  - name: restarted mongodb
-    ansible.builtin.service:
+  - name: restarted mongodb 
+    ansible.builtin.service:  # for starting the services using ansible.builtin.service
       name: mongod
       state: restarted
       
