@@ -63,7 +63,7 @@
   - name: Install mongodb clinet 
     ansible.builtin.dnf:
       name: mongodb-mongosh
-      state: present
+      state: absent
 
   - name: check the products loaded or not
     ansible.builtin.command: mongosh --host mongodb.vinodh.site --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
