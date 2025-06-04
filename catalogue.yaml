@@ -26,7 +26,7 @@
       state: directory
 
   - name: Download catalogue application code 
-    ansible.builtin.get_url:                              # dowloading the files using ( ansible.builtin.get_url) module
+    ansible.builtin.get_url:                                 # dowloading the files using ( ansible.builtin.get_url) module
       url: https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip 
       dest: /tmp/catalogue.zip
     
@@ -53,7 +53,19 @@
     ansible.builtin.service:                            # to restarting and enable service ( ansible.builtin.service) module
       name: catalogue
       state: restarted
-      enabled: yes 
+      enabled: yes
+
+  - name: copying mongodb repos
+    ansible.builtin.copy:                             # copying the files from source to destination in ansible using ( ansible.builtin.copy) module
+      src: mongo.repo 
+      dest: /etc/yum.repos.d/mongo.repo
+  
+
+  - name: Install mongodb clinet 
+    ansible.builtin.dnf:
+      name: mongodb-mongosh
+      state: present
+      
 
 
 
