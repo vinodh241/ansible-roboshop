@@ -13,8 +13,8 @@
       name: nodejs
       state: present
 
-  - name: creating application cart
-    ansible.builtin.cart:
+  - name: creating application user
+    ansible.builtin.user:
       name: roboshop
       shell: /sbin/nologin 
       system: true
