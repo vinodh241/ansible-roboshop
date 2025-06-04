@@ -46,7 +46,7 @@
       path: /etc/systemd/system/user.service
 
   - name: Systemctl daemon reload
-    ansible.builtin.systemd_service:                    # systemctl restarting daemon using ( ansible.builtin.systemd_service) module
+    ansible.builtin.systemd_service:             # systemctl restarting daemon using ( ansible.builtin.systemd_service) module
       daemon_reload: yes
 
   - name: start and enable user services
